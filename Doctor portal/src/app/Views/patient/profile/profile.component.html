@@ -1,0 +1,217 @@
+<!-- patient details layout -->
+<div class="viewCard">
+    <h1 style="font-weight: bolder ;">
+        <b> {{this.patient.name}}</b>
+        <hr />
+    </h1>
+
+    <div class="container-fluid mb-3">
+        <div class="row">
+            <div class="col-lg-4">
+                <img [src]="this.patient.proPic" class="profilePic img-responsive">
+            </div>
+            <div class="col-lg-8 detailCard">
+                <h4 style="font-weight: bolder;"><b>Patients Details</b></h4>
+                <!-- div for patient details -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <b>Name:</b>
+                            {{this.patient.name}} <br />
+                            <b>Mobile Number:</b>
+                            {{this.patient.mobileNumber}} <br />
+                            <b>Birth day:</b>
+                            {{this.patient.birthday.toDate() | date:'yyyy/MM/dd'|| null}} <br />
+                            <b>Age:</b>
+                            {{age + ' years'}} <br />
+                            <b>Gender:</b>
+                            {{this.patient.gender}} <br />
+                            <b>Blood Group:</b>
+                            {{this.patient.bloodGrp}} <br />
+
+                        </div>
+                        <div class="col-md-4">
+                            <b>Medical Description</b><br />
+                            {{this.patient.medicalDescription}}
+                        </div>
+                        <div class="col-md-4" style="margin:auto;">
+                            <button mdbBtn type="button" color="primary" mdbWavesEffect
+                                (click)="prescriptionModal.show()">
+                                <mdb-icon fas icon="plus" class="mr-1"></mdb-icon>Add Prescription.
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- medical history table of patient -->
+    <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="this.prescriptions" [paginator]="true" [rows]="10"
+        dataKey="vin" selectionMode="single">
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col" style="text-align: left; font-weight: bolder;font-size: medium;">
+                    Patients Medical History.
+                </div>
+                <div class="col">
+                    <div class="ui-table-globalfilter-container">
+                    </div>
+                </div>
+            </div>
+
+
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+
+                </th>
+                <th style="width: 8em; text-align: center;">
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                <td>{{rowData.docName}}</td>
+                <td>{{rowData.createdAt.toDate()| date:'yyyy/MM/dd'|| null}}</td>
+                <td>
+                    {{rowData.prescription}}
+                </td>
+                <td>
+                    <button *ngIf="rowData.repeat" type="button" mdbBtn color="primary" size="sm"
+                        class="relative waves-light" mdbWavesEffect style="margin: auto;">Repeat</button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>
+
+<!-- modal to add prescriptions -->
+<div mdbModal #prescriptionModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#4285f4; color: white;">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="prescriptionModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">
+                    <mdb-icon fas icon="plus" class="mr-1"></mdb-icon>
+                    <b>Add Prescription</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg"
+                            style="margin-top:auto;margin-bottom:auto; margin-right: 20px; border: 1px solid grey;border-radius: 11px; padding: 20px;">
+                            <h2>
+                                Prescription Details
+                            </h2>
+                            <label>Prescription:</label>
+                            <div class="md-form">
+                                <textarea type="text" id="form7" class="md-textarea form-control" mdbInput
+                                    [(ngModel)]="this.prescriptionTxt"></textarea>
+                                <label for="form7">Type the Prescrption Here</label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitches"
+                                            [(ngModel)]="repeat">
+                                        <label class="custom-control-label" for="customSwitches">
+                                            {{ repeat ? 'Enable Repeate' : 'Disable Repete' }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+                            <label>Expire Date:</label><br />
+                            <p-calendar [(ngModel)]="expDate" [minDate]="today"></p-calendar>
+                            <br />
+                            <br />
+
+                        </div>
+                        <div class="col-lg"
+                            style="margin-top:auto;margin-bottom:auto; border: 1px solid grey;border-radius: 11px; padding: 20px; background-color: rgb(21, 101, 192,0.4)">
+                            <!-- medicin quick selector -->
+                            <h2>
+                                Quick Selector
+                            </h2>
+                            <form #selectorForm="ngForm">
+                                <label>Drug:</label>
+                                <select name="drug" class="browser-default custom-select" [(ngModel)]="_medicineItem.name" required>
+                                    <option selected>Select Medicine from the list</option>
+                                    <option [ngValue]="_medicine.name" *ngFor="let _medicine of medicine">
+                                        {{_medicine.name}}
+                                    </option>
+                                </select>
+
+                                <label style="margin-top:20px;">Dosage:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="Number" name="dose" pInputText class="form-control mb-2" placeholder="#"
+                                            [(ngModel)]="_medicineItem.mesureValue" required>
+                                    </div>
+                                    <div class="col">
+                                        <select class="browser-default custom-select" name="doseMesure"
+                                            [(ngModel)]="_medicineItem.mesure" required>
+                                            <option selected>ml/mg</option>
+                                            <option value="ml">ml</option>
+                                            <option value="mg">mg</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label>Duration:</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="Number" pInputText class="form-control mb-2" placeholder="#"
+                                            [(ngModel)]="_medicineItem.duretionValue" name="duretion"required>
+                                    </div>
+                                    <div class="col">
+                                        <select class="browser-default custom-select" name="duretionMeasure"
+                                            [(ngModel)]="_medicineItem.duretion" required>
+                                            <option selected>D/W</option>
+                                            <option value="Days">Days</option>
+                                            <option value="Weeks">Weeks</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <button mdbBtn type="button" color="success" mdbWavesEffect (click)="printSelect()"
+                                        [disabled]="selectorForm.invalid">
+                                        <mdb-icon fas icon="arrow-left" class="mr-1"></mdb-icon>Add to Prescription.
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                    </div>
+                </div>
+                <div class="row" style="align-content: flex-end; margin-left: 8px;">
+                    <div *ngIf="emptyErr" class="alert alert-danger" role="alert">
+                        Prescription field can not be empty
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" mdbBtn color="light" class="waves-light" aria-label="Close"
+                        (click)="this.prescriptionModalClose()" mdbWavesEffect>Close</button>
+                    <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="this.addPrescription()">Save!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

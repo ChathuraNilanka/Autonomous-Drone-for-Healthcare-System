@@ -1,0 +1,291 @@
+<!-- this is the doctors profile page -->
+<div class="viewCard">
+    <h1 style="font-weight: bolder ;">
+        <b> Hello! Doctor</b>
+        <hr />
+    </h1>
+
+    <div class="container-fluid mb-3">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- doc pro pic -->
+                <img [src]="this.docObj.proPic" class="profilePic img-responsive">
+            </div>
+            <div class="col-lg-8 detailCard">
+                <!-- doctor details div -->
+                <h4 style="font-weight: bolder;"><b>Your Details</b></h4>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <b>Name:</b>
+                            {{this.docObj.name}}<br />
+                            <b>Mobile Number:</b><br />
+                            {{this.docObj.mobileNumber}}<br />
+                            <b>E-mail:</b><br />
+                            {{this.docObj.email}}<br />
+                            <b>MBBS:</b><br />
+                            {{this.docObj.mbbs}}<br />
+                            <b>Speciality:</b><br />
+                            {{this.docObj.specialty}} <br />
+
+                        </div>
+                        <div class="col-md-4">
+                            <b>Bio</b><br />
+                            {{this.docObj.bio}}
+                        </div>
+                        <div class="col-md-4">
+                            <!-- button panel -->
+                            <div class="row" style="margin-bottom: 20px;">
+                                <button mdbBtn type="button" color="primary" mdbWavesEffect (click)="editModal.show()"
+                                    style="margin:auto;text-align: center;">
+                                    <mdb-icon fas icon="user-md" class="mr-1"></mdb-icon> Edit Profile
+                                </button>
+                            </div>
+                            <div class="row" style="margin-bottom: 20px;">
+                                <button mdbBtn type="button" color="primary" mdbWavesEffect
+                                    (click)="passwordModal.show()" style="margin:auto;text-align: center;">
+                                    <mdb-icon fas icon="key" class="mr-1"></mdb-icon>Change Password
+                                </button>
+                            </div>
+                            <div class="row" style="margin-bottom: 20px;">
+                                <button mdbBtn type="button" color="primary" mdbWavesEffect (click)="addMedModel.show()"
+                                    style="margin:auto;text-align: center;">
+                                    <mdb-icon fas icon="plus" class="mr-1"></mdb-icon>Add Medicine to Your Selector
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- model to edit doctor details -->
+<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#4285f4; color: white;">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">
+                    <mdb-icon fas icon="user-md" class="mr-1"></mdb-icon>
+                    <b>Edit Profile</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <input mdbInput placeholder="Name" type="text" id="docName" class="form-control"
+                                    [(ngModel)]=this.docObj.name disabled>
+                                <label for="docName">Name</label>
+                            </div>
+                            <div class="md-form">
+                                <input mdbInput placeholder="Mobile Number" type="text" id="mNum" class="form-control"
+                                    [(ngModel)]=this.editObj.mobileNumber>
+                                <label for="mNum">Mobile Number</label>
+                            </div>
+                            <div class="md-form">
+                                <input mdbInput placeholder="E-mail" type="text" id="email" class="form-control"
+                                    [(ngModel)]=this.editObj.email>
+                                <label for="email">E-mail</label>
+                            </div>
+                            <div class="md-form">
+                                <input mdbInput placeholder="Speciality" type="text" id="spe" class="form-control"
+                                    [(ngModel)]=this.docObj.specialty disabled>
+                                <label for="spe">Speciality</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="md-form">
+                                <textarea type="text" id="bio" class="md-textarea form-control" mdbInput
+                                    [(ngModel)]=this.editObj.bio></textarea>
+                                <label for="bio">Bio</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" mdbBtn color="light" class="waves-light" aria-label="Close"
+                        (click)="editModal.hide()" mdbWavesEffect>Close</button>
+                    <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="updateInfo()">Save!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- model to password change -->
+<div mdbModal #passwordModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#4285f4; color: white;">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="passwordModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">
+                    <mdb-icon fas icon="key" class="mr-1"></mdb-icon>
+                    <b>Change Password</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4" style="margin: auto;">
+                            <h6 style="margin: auto;">Current Password: </h6>
+                        </div>
+                        <div class="col-8">
+                            <show-hide-password size="sm" btnStyle="primary" [btnOutline]="false">
+                                <input mdbInput class="form-control" type="password" name="cPass"
+                                    style="margin-top:5px ;" [(ngModel)]="cpass">
+                                <mdb-error *ngIf="matchError"> <span *ngIf="!this.cpass"> Invalid Password</span>
+                                </mdb-error>
+                            </show-hide-password>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4" style="margin: auto;">
+                            <h6 style="margin: auto;">New Password: </h6>
+                        </div>
+                        <div class="col-8">
+                            <show-hide-password size="sm" btnStyle="primary" [btnOutline]="false">
+                                <input mdbInput class="form-control" type="password" name="nPass"
+                                    style="margin-top:5px ;" [(ngModel)]="npass">
+                            </show-hide-password>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4" style="margin: auto;">
+                            <h6 style="margin: auto;">Repeate Password: </h6>
+                        </div>
+                        <div class="col-8">
+                            <show-hide-password size="sm" btnStyle="primary" [btnOutline]="false">
+                                <input mdbInput class="form-control" type="password" name="rPass"
+                                    style="margin-top:5px ;" [(ngModel)]="rpass">
+                                <mdb-error *ngIf="matchError"> <span *ngIf="this.rpass != this.npass"> Passwords doesn't
+                                        match</span> </mdb-error>
+                            </show-hide-password>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" mdbBtn color="light" class="waves-light" aria-label="Close"
+                        (click)="passwordModal.hide()" mdbWavesEffect>Close</button>
+                    <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="this.changepassword();">Change Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- model to add medicine to doc quick select -->
+<div mdbModal #addMedModel="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#4285f4; color: white;">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="addMedModel.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">
+                    <mdb-icon fas icon="plus" class="mr-1"></mdb-icon>
+                    <b>Add Medicine</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form #medAddForm="ngForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <input mdbInput placeholder="eg: Paracetamol" type="text" name="medName"
+                                        class="form-control" [(ngModel)]="this.medItem.name" required>
+                                    <label for="medName">Medicine Name</label>
+                                </div>
+                                <div class="md-form">
+                                    <input mdbInput placeholder="eg: Pain Killer" type="text" name="medType"
+                                        class="form-control" [(ngModel)]="this.medItem.type" required>
+                                    <label for="medType">Medicine Type</label>
+                                </div>
+                                <div class="md-form">
+                                    <span style="font-size: small;">Messure</span>
+                                    <select class="browser-default custom-select" id="doseMesure"
+                                        [(ngModel)]="this.medItem.mesure" name="mesure" required>
+                                        <option selected>ml/mg</option>
+                                        <option value="ml">ml</option>
+                                        <option value="mg">mg</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" mdbBtn color="light" class="waves-light" aria-label="Close"
+                        (click)="addMedModel.hide()" mdbWavesEffect>Close</button>
+                    <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="addMedicine()" [disabled]="medAddForm.invalid">Save!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="viewCard">
+    <h1 style="font-weight: bolder ;">
+        <b> My TimeTable</b>
+        <hr />
+    </h1>
+
+    <div class="container-fluid mb-3">
+        <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="this.timeTable" [paginator]="true" [rows]="10"
+            dataKey="vin" selectionMode="single">
+            <ng-template pTemplate="caption">
+                <div class="row">
+                    <div class="col" style="text-align: left; font-weight: bolder;font-size: medium;">
+                        Time Table Details.
+                    </div>
+                    <div class="col">
+                        <div class="ui-table-globalfilter-container">
+                            <!-- <input type="text" pInputText size="50" placeholder="Search"  > -->
+                        </div>
+                    </div>
+                </div>
+
+
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+
+                    </th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                    <td>{{rowData.date}}</td>
+                    <td>{{rowData.venue}}</td>
+                    <td>
+                        {{rowData.time}}
+                    </td>
+
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+</div>

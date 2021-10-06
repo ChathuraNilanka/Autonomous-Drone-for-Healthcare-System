@@ -1,0 +1,64 @@
+<!-- layout of login page -->
+<div class="viewCard">
+    <div class="signin">
+        <div class="signinCover">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 align-self-center">
+                    <div>
+                        <h3 style="font-weight:bold;">Sign in</h3>
+                        <!-- form for login credentials -->
+                        <form name="signInform" (ngSubmit)="signIn()">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input mdbInput type="email" name = "email" class="form-control" id="inputEmail4MD"
+                                            placeholder="Email" [(ngModel)]="loginModel.username" >
+                                        <label for="inputEmail4MD">Email</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input mdbInput type="password" name = "password" class="form-control" id="inputPassword4MD"
+                                            placeholder="Password" [(ngModel)]="loginModel.password">
+                                        <label for="inputPassword4MD">Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- invalid credential alert -->
+                            <div *ngIf = "loginErr" class="alert alert-danger" role="alert">
+                                Invalid Username or Passward!
+                              </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" mdbBtn color="primary">Sign in</button>
+                                </div>
+                            </div>
+                            <!-- Grid row -->
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-4 innerCard">
+                    <div class="card text-white" style="background-color: rgba(41, 120, 238, 0.774); margin-bottom: 10px; margin-top: 10px; color: white;">
+                        <div class="card-body innerCard">
+                            <h3 class="card-title">Want to Register?</h3>
+                            <p class="card-text">Are you a Doctor? <br/>
+                                Then E-Medic is the Best platform to manage your
+                                Cantact E-medic team for Doctor Registations. We are waiting for your call :)</p>
+                            <ul>
+                                <li><i class="fas fa-phone-alt"></i> +94 774 856 998</li>
+                                <li><i class="far fa-envelope"></i> EMedicRegistation@Emedic.com</li>
+                            </ul>
+                            <br/>
+                            <a href="/home" class="btn text-white border border-white">info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        </div>
+    </div>
+</div>

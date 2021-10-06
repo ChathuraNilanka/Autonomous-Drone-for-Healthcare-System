@@ -1,0 +1,6 @@
+<!-- layout of bussy indicator -->
+<div id="apploading" [ngClass]="{'busy-indicator-container': true, 'busy':busyCount > 0}">
+    <div class="busy-indicator">
+        <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="4"></p-progressSpinner>
+    </div>
+</div>

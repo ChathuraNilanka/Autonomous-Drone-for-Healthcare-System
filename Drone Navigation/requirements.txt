@@ -1,0 +1,4 @@
+dronekit
+pymavlink
+flask
+flask_cors

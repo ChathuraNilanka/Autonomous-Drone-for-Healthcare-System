@@ -1,0 +1,80 @@
+<div class="viewCard">
+    <h1 style="font-weight: bolder ;">
+        <b> Delivery of {{"patient"}}</b>
+        <hr />
+    </h1>
+    <!-- drone live locetion on a map -->
+    <agm-map [latitude]="s_lat" [longitude]="s_lng">
+        <agm-marker [latitude]="s_lat" [longitude]="s_lng"></agm-marker>
+    </agm-map>
+    <div style="margin-top: 20px;">
+        <!-- drone live details view -->
+        <div class="container-fluid mb-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <b>Latitude: <br />
+                        <div class="DetailsClz">{{this.trip.lat}}</div>
+                    </b>
+                    <b>Longitude:<br />
+                        <div class="DetailsClz">{{this.trip.lon}}</div>
+                    </b>
+                    <b>Altitude: <br />
+                        <div class="DetailsClz">{{this.trip.alt}}</div>
+                    </b>
+                    <b>Speed:</b><br />
+                        <div class="DetailsClz">{{this.speed| number : '1.0-2'}}</div>
+                </div>
+                <div class="col-md-3 ">
+                    <b>Battery: <br />
+                        <div class="DetailsClz">{{this.trip.battery}}</div>
+                    </b><br />
+                    <b>
+                        <div class="DetailsClz">{{this.trip.status}}</div>
+                    </b><br />
+                    <b>Armed: <br />
+                        <div class="DetailsClz">{{this.trip.isArmed}}</div>
+                    </b><br />
+                    <b>is Arrived: <br />
+                        <div class="DetailsClz">{{this.trip.isArrived}}</div>
+                    </b><br />
+                </div>
+                <div class="col-md-3" style="margin: auto;">
+                    <div class="col">
+                        <div style="text-align: left;">
+                            <h4>Locetion Object</h4>
+                            <b>Latitude: <br />
+                                <div class="set_DetailsClz">{{this._locetion.lat}}</div>
+                            </b>
+                            <b>Longitude:<br />
+                                <div class="set_DetailsClz">{{this._locetion.lon}}</div>
+                            </b>
+                            <b>Altitude: <br />
+                                <div class="set_DetailsClz">{{this._locetion.alt}}</div>
+                            </b>
+                        </div>
+                        <div class="text-align:ccenter">
+                            <button type="button" mdbBtn color="secondary" mdbWavesEffect (click)=setLocetion()
+                                [disabled]="!this.disableDeploy">Set
+                                Locetion</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" style="margin: auto;">
+                    <div class="row">
+                        <div class="col" style="text-align: center;">
+                            <button type="button" mdbBtn color="secondary" mdbWavesEffect (click)=Deploy()
+                                [disabled]="this.disableDeploy">Deploy
+                                Drone</button>
+                            <button type="button" mdbBtn color="success" mdbWavesEffect (click)=Release()
+                                [disabled]="this.disableDeploy">Release Package</button><br/>
+                                <button type="button" mdbBtn color="danger" mdbWavesEffect (click)=unsub_getInfo()
+                                [disabled]="this.disableDeploy" *ngIf = this.subsribe>Unsubscribe Tracking</button>  
+                                <button type="button" mdbBtn color="primary" mdbWavesEffect (click)=setSubObj()
+                                [disabled]="this.disableDeploy" *ngIf = !this.subsribe>Get Info</button>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

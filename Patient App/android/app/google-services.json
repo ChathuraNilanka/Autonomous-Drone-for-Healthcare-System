@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "667545551239",
+    "firebase_url": "https://e-medic-db912.firebaseio.com",
+    "project_id": "e-medic-db912",
+    "storage_bucket": "e-medic-db912.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667545551239:android:51355edb766e064eead322",
+        "android_client_info": {
+          "package_name": "com.emedic.emedic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667545551239-htqm70lon0r0a6j47gork308n9oagulj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emedic.emedic",
+            "certificate_hash": "c594296c7574551ed8ead5f88300c45c605e6c3e"
+          }
+        },
+        {
+          "client_id": "667545551239-rndmb5khppd9ugrmaslqo6q41ecc145b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXDtWxU4y2GmImZ4ogQLOpTGl6J8IUl70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667545551239-rndmb5khppd9ugrmaslqo6q41ecc145b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

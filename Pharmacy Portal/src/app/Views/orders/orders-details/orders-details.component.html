@@ -1,0 +1,111 @@
+<div class="viewCard">
+    <h1 style="font-weight: bolder ;">
+        <b> Order of {{this.order.patientName}}</b>
+        <hr />
+    </h1>
+    <div class="container-fluid mb-3">
+        <div class="row">
+            <!-- prescription details view -->
+            <div class="col-lg-3">
+                <h4 style="font-weight: bolder;"><b>Prescription</b></h4>
+                <b>Doctor Name:</b> <br/>
+                {{this.order.docName}}
+                <br/><br/>
+                <b>Prescription:</b><br/>
+                {{this.order.prescription}}
+            </div>
+            <div class="col-lg-9">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 style="font-weight: bolder;"><b>Customer Details</b></h4>
+                            <b>Patient Name:</b><br/> {{this.order.patientName || null}}<br/><br/>
+                            <b>Contact Number: </b><br/>{{this.order.contactNum ||null}}
+                        </div>
+                        <div class="col-md-8">
+                            <h4 style="font-weight: bolder;"><b>Locetion Details</b></h4>
+                            <!-- map to indicate delivery locetion -->
+                            <agm-map [latitude]="s_lat" [longitude]="s_lng">
+                                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                            </agm-map><br/>
+                            <div style="font-size: large;">
+                                <!-- display dictence to delivery locetion -->
+                                <b>Distance: {{this.distence}} meters</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <!-- div if the status is delivery waiting -->
+            <div class="row" *ngIf = "this.status !== 'waiting'">
+                <div class="col-lg-12">
+                    <hr>
+                    <h4 style="font-weight: bolder;"><b>Confirmetion</b></h4>
+                    <hr>
+                </div>
+            </div>
+
+            
+            <!-- div if the status not delivery waiting -->
+            <div class="row" *ngIf = "this.order.orderStatus !== 'waiting'">
+                <div class="col-lg-4">
+                    <b>Max Speed</b> 
+                    <input id= "max_speed" mdbInput type="number" class="form-control" id="inputEmail4MD" placeholder="max_speed" [(ngModel)] = "this.delivery.max_speed">
+                    <b>Altitude</b> 
+                    <input id= "altitude" mdbInput type="number" class="form-control" id="inputEmail4MD" placeholder="altitude" [(ngModel)] = "this.delivery.alttitude">
+                    <b>Weigh of the Package</b> 
+                    <input id= "weight" mdbInput type="number" class="form-control" id="inputEmail4MD" placeholder="weight"  [(ngModel)] = "this.delivery.weight">
+                </div>
+                <div class="col-lg-4">
+                    <b>Humedity</b> 
+                    <input id= "humedity" mdbInput type="number" class="form-control" id="inputEmail4MD" placeholder="humedity" [(ngModel)] = "this.delivery.humadity">
+                    <b>Wind Speed</b> <br/>
+                    <input id= "wind_speed" mdbInput type="number" class="form-control" id="inputEmail4MD" placeholder="wind_speed" [(ngModel)] = "this.delivery.wind_speed">
+                    <br/>
+                </div>
+                <div class="col-lg-2" style = "text-align: center;">
+                    <div style="margin:auto;">
+                        <h3>{{this.ETA | number : '1.0-2'}} Sec</h3>
+                    <button type="button" mdbBtn color="success" mdbWavesEffect (click) = "calculateETA()" [disabled] = "EnableETAButton()">Calculate ETA</button>   
+                </div>
+                </div>
+                
+                <!-- show navigetion btns according to the order status -->
+                <div class="col-lg-2">
+                    <h4 style="font-weight: bolder; text-align: center; margin-top: auto;margin-bottom: auto;" *ngIf = "this.order.orderStatus == 'accepted'" (click) = acceptOrder()>
+                        Waiting order to be Paid
+                    </h4>
+                    <h4 style="font-weight: bolder; text-align: right; margin-top: auto; margin-bottom: auto;" *ngIf = "this.order.orderStatus == 'paid' && this.delivery.alttitude" (click) = deployDrone()>
+                        <button type="button" mdbBtn color="secondary" mdbWavesEffect>Deploy Drone</button>
+                    </h4>
+                    <h4 style="font-weight: bolder; text-align: right; margin-top: auto; margin-bottom: auto;" *ngIf = "this.order.orderStatus == 'onTheWay'" (click) = monitorDrone()>
+                        <button type="button" mdbBtn color="danger" mdbWavesEffect>Monitor the Delivery</button>
+                    </h4>
+                </div>
+            </div>
+
+            
+            <div class="row" *ngIf = "this.status == 'waiting'">
+                <div class="col-lg-12">
+                    <hr>
+                    <h4 style="font-weight: bolder;"><b>Accept Order</b></h4>
+                    <hr>
+                </div>
+            </div>
+            <div class="row" *ngIf = "this.status == 'waiting'">
+                <div class="col-lg-4">
+                    <b>Prescription Amount</b> 
+                    <input id= "amount" mdbInput type="number" class="form-control" id="inputEmail4MD" placeholder="amount" [(ngModel)] = "this.order.amount">
+                    </div>
+                    <div class="col-lg-2">
+                        <h4 style="font-weight: bolder; text-align: right; margin-top: auto;margin-bottom: auto;">                                                                                                       
+                            <button type="button" mdbBtn color="success" mdbWavesEffect (click) = acceptOrder() [disabled]= "!this.order.amount">Accept Order</button>
+                        </h4>
+                        </div>
+            </div>
+    </div>
+    
+
+</div>

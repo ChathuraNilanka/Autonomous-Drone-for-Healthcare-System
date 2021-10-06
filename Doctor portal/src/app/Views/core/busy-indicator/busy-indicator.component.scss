@@ -1,0 +1,32 @@
+.busy-indicator-container {
+    display: none;
+    &.busy {
+        display: block;
+    }
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: 99997;
+}
+
+.busy-indicator-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    opacity: 0.25 !important;
+    z-index: 99998;
+}
+
+.busy-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);    
+    z-index: 99999;
+}

@@ -1,0 +1,126 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark  red lighten-1" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand>
+    <a class="navbar-brand" href="home/">
+      <img src='../assets/img/withlable.png' style="width: 200px; height: 50px;">
+    </a>
+  </mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect href="home/">Home</a>
+      </li>
+      <li class="nav-item" *ngIf=navbarOpt>
+        <a class="nav-link waves-light" mdbWavesEffect href="orders">Orders</a>
+      </li>
+    </ul>
+    <!-- Links -->
+
+    <button mdbBtn type="button" color="info" rounded="true" mdbWavesEffect *ngIf=!navbarOpt (click)="navtoLogin()">Sign
+      in</button>
+
+    <ul class="navbar-nav ml-auto nav-flex-icons" *ngIf=navbarOpt>
+      <li class="nav-item">
+        <a class="nav-link">
+          <!-- <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" href="/profile"><mdb-icon fas icon="user-md"></mdb-icon>Manage Profile</a>
+              <div class="divider dropdown-divider"></div>
+              <span (click)="signOut()">
+                <a class="dropdown-item" style="color: rgb(233, 44, 44); font-weight: bold;" href="/account">Sign
+                  Out</a>
+              </span>
+            </div>
+          </div> -->
+        </a>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+<div class="intro-2" id="top-section">
+  <div class="full-bg-img mask rgba-gradient">
+    <br />
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="page-footer font-small red lighten-1">
+
+  <div class="drone"></div>
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">E-Medic</h5>
+        <p>E-medic is the one and only drone medicine dilivery company in Sri Lanka</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Contact us:</h5>
+
+        <ul class="list-unstyled">
+          <li><i class="fas fa-phone-alt"></i> +94 774 856 998</li>
+          <li><i class="far fa-envelope"></i> EMedicRegistation@Emedic.com</li>
+          <li>
+            <a href="#!">Blog</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Support</h5>
+
+        <ul class="list-unstyled">
+          <li><i class="fas fa-phone-alt"></i> +94 774 856 998</li>
+          <li><i class="far fa-envelope"></i> EMedicSupport@Emedic.com</li>
+          <li>
+            <a href="#!">Help Center</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    <a href="https://www.EMedic.com"> E-medic.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

@@ -1,0 +1,119 @@
+<!-- doctors patients layout -->
+<div class="viewCard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 style="font-weight: bolder; color: #292b2c;">
+                    <b> My Patients.</b>
+                </h1>
+            </div>
+            <div class="justify-content-end" style="align-content: flex-end;">
+                <button type="button" mdbBtn color="success" mdbWavesEffect (click)="basicModal.show()">
+                    <mdb-icon fas icon="plus"></mdb-icon>
+                    Add Patients
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr style="margin:0px;" />
+    <div class="md-form">
+        <input mdbInput type="text" id="form1" class="form-control"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:100;">
+        <label for="form1" class=""><b>Search</b></label>
+    </div>
+
+    <!-- table to show all the patients of a doc -->
+    <p-table #dt [columns]="cols" styleClass="ui-table-patients" [value]="this.patients" [paginator]="true" [rows]="10"
+        dataKey="nic" selectionMode="single" (onLazyLoad)="loadLazy($event)" [lazy]="true" selectionMode="single" [responsive]="true" (onRowSelect)="navProfile($event)">
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col" style="text-align: left;">
+                    Patients
+                </div>
+                <div class="col">
+                    <div class="ui-table-globalfilter-container">
+                        <!-- <input type="text" pInputText size="50" placeholder="Search"  > -->
+                    </div>
+                </div>
+            </div>
+
+
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th style="width:auto; text-align:center">Medical History
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                <td>{{rowData.name}}</td>
+                <td><a href="tel:{{rowData.mobileNumber}}">{{rowData.mobileNumber}}</a></td>
+                <td>{{rowData.email}}</td>
+                <td>{{rowData.nic}}</td>
+                <td style="text-align: center">
+                    <button type="button" mdbBtn color="primary" mdbWavesEffect>Records</button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>
+
+<!-- modal to add petients to doctors profile -->
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel" style="color: #0275d8; font-weight: bold;">
+                    <mdb-icon fas icon="plus"></mdb-icon> Add Patient
+                </h4>
+            </div>
+            <div class="modal-body">
+                
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <div class="md-form">
+                                <input name="nic" mdbInput placeholder="911234567V / 1234567899" 
+                                       type="text" id="form58" class="form-control" [(ngModel)] = "nic">
+                                <label for="form58">Patients NIC</label>
+                            </div>
+                        </div>
+                       
+                        <div class="justify-content-end" style="align-content: flex-end; margin-top: 8px;">
+                            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click) = "addPatient();">
+                                <mdb-icon far icon="paper-plane"></mdb-icon>
+                                Send Request</button>
+                        </div>
+                        
+
+                        
+                    </div>
+                    <div class="row" style="align-content: flex-end; margin-left: 8px;">
+                        <div *ngIf= "addErr" class="alert alert-danger" role="alert">
+                            This Nic is not registerd with E-Medic :(
+                          </div>
+                    </div>
+                    <div class="row" style="align-content: flex-end; margin-left: 8px;">
+                          <div *ngIf= "emptyErr" class="alert alert-danger" role="alert">
+                            NIC field can not be empty
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast position="top-right"></p-toast>

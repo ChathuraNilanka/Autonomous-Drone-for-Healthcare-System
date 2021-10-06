@@ -1,0 +1,33 @@
+.viewCard {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.842);
+    padding: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    min-height: 450px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+    color: rgb(52, 53, 52);
+  }
+  
+  .signin{
+      background-image: url("../../../assets/img/drone.png");
+      background-size: initial;
+      width: auto;
+  }
+
+  .signinCover{
+    background-color: rgba(255, 255, 255, 0.842);
+  }
+
+
+
+  .innerCard{
+    min-height: 430px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }

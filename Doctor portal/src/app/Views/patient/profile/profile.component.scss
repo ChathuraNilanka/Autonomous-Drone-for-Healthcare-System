@@ -1,0 +1,93 @@
+.viewCard {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.774);
+  padding: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  min-height: 450px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: hidden;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  color: rgb(52, 53, 52);
+}
+
+.detailCard {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.774);
+    padding: 20px;
+    min-height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+    word-wrap: break-word;
+    color: rgb(52, 53, 52);
+  }
+
+hr {
+  border: 2px solid rgb(52, 53, 52);
+  border-radius: 5px;
+}
+
+
+.ui-table.ui-table-cars .ui-table-caption.ui-widget-header {
+  border: 0 none;
+  padding: 12px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.ui-column-filter {
+  margin-top: 1em;
+}
+
+.ui-column-filter .ui-multiselect-label {
+  font-weight: 500;
+}
+
+.ui-table.ui-table-cars .ui-table-thead > tr > th {
+  border: 0 none;
+  text-align: left;
+}
+
+.ui-table-globalfilter-container {
+  float: right;
+  display: inline;
+}
+
+.ui-table.ui-table-cars .ui-table-tbody > tr > td {
+  border: 0 none;
+}
+
+.ui-table.ui-table-cars .ui-table-tbody .ui-column-title {
+  font-size: 16px;
+}
+
+.ui-table.ui-table-cars .ui-paginator {
+  border: 0 none;
+  padding: 1em;
+}
+
+
+.profilePic {
+  width: 250px;
+  height: 250px;
+  margin: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+label{
+  font-weight: bolder;
+  font-size: large;
+}

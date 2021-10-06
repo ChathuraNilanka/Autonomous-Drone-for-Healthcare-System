@@ -1,0 +1,49 @@
+<!-- this layput use to show all the prescriptions of a doctor -->
+
+<div class="viewCard">
+    <h1 style="font-weight: bolder ;">
+        <b> My Prescriptions</b>
+        <hr />
+    </h1>
+
+    <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="this.prescriptions" [paginator]="true" [rows]="10"
+         selectionMode="single">
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col" style="text-align: left; font-weight: bolder;font-size: medium;">
+                    Your Prescriptions.
+                </div>
+                <div class="col">
+                    <div class="ui-table-globalfilter-container">
+                    </div>
+                </div>
+            </div>
+
+
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+
+                </th>
+                <th style="width: 8em; text-align: center;">
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                <td>{{rowData.patientName}}</td>
+                <td>{{rowData.createdAt.toDate()| date:'yyyy/MM/dd'|| null}}</td>
+                <td>
+                    {{rowData.prescription}}
+                </td>
+                <td>
+                    <button type="button" mdbBtn color="primary" size="sm" class="relative waves-light"
+                        mdbWavesEffect>View</button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

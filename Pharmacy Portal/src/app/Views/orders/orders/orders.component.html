@@ -1,0 +1,66 @@
+<div class="viewCard">
+    <h1 style="font-weight: bolder ;">
+        <b> Order </b>
+        <hr />
+    </h1>
+    <!-- order search bar -->
+    <div class="md-form">
+        <input mdbInput type="text" id="form1" class="form-control"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:100;">
+        <label for="form1" class=""><b>Search</b></label>
+    </div>
+
+    <!-- p table for orders -->
+    <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="this.orders" [paginator]="true" [rows]="10"
+    dataKey="vin" selectionMode="single">
+    <ng-template pTemplate="caption">
+        <div class="row">
+            <div class="col" style="text-align: left; font-weight: bolder;font-size: medium;">
+                Orders.
+            </div>
+            <div class="col">
+                <div class="ui-table-globalfilter-container">
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+            <th style="width: 8em; text-align: center;">
+                <!-- <button  type="button" icon="pi pi-cog"></button> -->
+            </th>
+        </tr>
+    </ng-template>
+
+    <!-- status colume of the orders -->
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+            <td>{{rowData.patientName}}</td>
+            <td>{{rowData.contactNum}}</td>
+      
+            <!-- assign different colors for each status  -->
+            <td *ngIf = "rowData.orderStatus == 'onTheWay'" style="background-color: greenyellow;">{{rowData.orderStatus}}</td>
+            <td *ngIf = "rowData.orderStatus == 'waiting'" style="background-color: rgb(255, 251, 14);">{{rowData.orderStatus}}</td>
+            <td *ngIf = "rowData.orderStatus == 'paid'" style="background-color: rgb(8, 191, 247);">{{rowData.orderStatus}}</td>
+            <td *ngIf = "rowData.orderStatus == 'accepted'" style="background-color: rgb(72, 128, 9);">{{rowData.orderStatus}}</td>
+            <td *ngIf = "rowData.orderStatus == 'completed'" style="background-color: rgb(223, 82, 16);">{{rowData.orderStatus}}</td>
+            <td *ngIf = "rowData.orderStatus !== 'onTheWay' && 
+                         rowData.orderStatus !== 'paid' && 
+                         rowData.orderStatus !== 'accepted' &&
+                         rowData.orderStatus !== 'waiting' &&
+                         rowData.orderStatus !== 'completed' " >{{rowData.orderStatus}}</td>
+            <td>{{rowData.createdAt.toDate()| date:'yyyy/MM/dd'|| null}}</td>
+            <td>
+                <!-- navigete to the order detail page -->
+                <button type="button" mdbBtn color="primary" size="sm" class="relative waves-light"
+                    mdbWavesEffect (click) = nav_details(rowData)>View</button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
